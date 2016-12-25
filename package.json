@@ -1,0 +1,40 @@
+{
+  "name": "libblkid",
+  "version": "0.0.0",
+  "description": "Interface for libblkid, a library to identify block devices",
+  "main": "build/Release/blkid.node",
+  "scripts": {
+    "install": "prebuild --install",
+    "prebuild": "prebuild --all --strip --verbose",
+    "rebuild": "prebuild --compile",
+    "test": "./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piranna/libblkid.git"
+  },
+  "keywords": [
+    "blkid",
+    "block",
+    "device",
+    "uuid",
+    "partuuid",
+    "label",
+    "partition",
+    "filesystem",
+    "disk"
+  ],
+  "author": "Jesús Leganés-Combarro 'piranna' <piranna@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piranna/libblkid/issues"
+  },
+  "homepage": "https://github.com/piranna/libblkid#readme",
+  "dependencies": {
+    "nan": "^2.5.0",
+    "prebuild": "^5.1.2"
+  },
+  "devDependencies": {
+    "buho": "^0.2.1"
+  }
+}
