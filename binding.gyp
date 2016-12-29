@@ -1,17 +1,14 @@
 {
-    "targets": [{
-        "target_name": "libblkid",
-#        "dependencies": [
-#            "static/util-linux.gyp:libblkid"
-#        ],
-        "include_dirs": [
-            "<!(node -e \"require('nan')\")"
-        ],
-        "libraries": [
-            "-lblkid"
-        ],
-        "sources": [
-            "libblkid.cc"
-        ]
-    }]
+    'variables':
+    {
+        'has_libblkid%': '<!(static/has_lib.sh blkid)'
+    },
+    'conditions':
+    [
+        ['has_libblkid=="true"', {
+            'includes': ['shared.gyp']
+        }, {
+            'includes': ['static.gyp']
+        }]
+    ]
 }

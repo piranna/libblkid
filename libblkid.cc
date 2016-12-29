@@ -1,6 +1,6 @@
 #include <nan.h>
 
-#include <blkid/blkid.h>
+#include <blkid.h>
 
 
 /**
