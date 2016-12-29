@@ -14,24 +14,32 @@
  */
 void evaluate_tag(const Nan::FunctionCallbackInfo<v8::Value>& info)
 {
-  // Check arguments
+  // Token
   if(info.Length() < 1)
-    return Nan::ThrowTypeError("Token is missing");
+    return info.GetReturnValue().Set(Nan::Null());
 
   if(!info[0]->IsString())
     return Nan::ThrowTypeError("Token must be a string");
 
-  if(info.Length() > 1 && !info[1]->IsString())
-    return Nan::ThrowTypeError("Value must be a string or undefined");
-
-  // Extract arguments data
   Nan::Utf8String token(info[0]);
-  Nan::Utf8String value(info[1]);
+
+  // Value
+  char* ptrValue = NULL;
+  if(info.Length() > 1)
+  {
+    if(info[1]->IsString())
+    {
+      Nan::Utf8String value(info[1]);
+      ptrValue = *value;
+    }
+    else if(!info[1]->IsNull() && !info[1]->IsUndefined())
+      return Nan::ThrowTypeError("Value must be a string, null or undefined");
+  }
 
   // Get the device path
-  char* device = blkid_evaluate_tag(*token, *value, NULL);
-  if(device == NULL)
-    return Nan::ThrowTypeError("Device not found");
+  char* device = blkid_evaluate_tag(*token, ptrValue, NULL);
+  if(!device)
+    return info.GetReturnValue().Set(Nan::Null());
 
   // Return the device path
   v8::Local<v8::String> result = Nan::New(device).ToLocalChecked();
@@ -52,7 +60,7 @@ void evaluate_spec(const Nan::FunctionCallbackInfo<v8::Value>& info)
 {
   // Check arguments
   if(info.Length() < 1)
-    return Nan::ThrowTypeError("Spec is missing");
+    return info.GetReturnValue().Set(Nan::Null());
 
   if(!info[0]->IsString())
     return Nan::ThrowTypeError("Spec must be a string");
@@ -62,8 +70,8 @@ void evaluate_spec(const Nan::FunctionCallbackInfo<v8::Value>& info)
 
   // Get the device path
   char* device = blkid_evaluate_spec(*spec, NULL);
-  if(device == NULL)
-    return Nan::ThrowTypeError("Device not found");
+  if(!device)
+    return info.GetReturnValue().Set(Nan::Null());
 
   // Return the device path
   v8::Local<v8::String> result = Nan::New(device).ToLocalChecked();
