@@ -6,9 +6,9 @@
     'conditions':
     [
         ['has_libblkid=="true"', {
-            'includes': ['shared.gyp']
+            'includes': ['shared.gypi']
         }, {
-            'includes': ['static.gyp']
+            'includes': ['static.gypi']
         }]
     ]
 }
