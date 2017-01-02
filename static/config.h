@@ -360,7 +360,7 @@
 #define HAVE_SCHED_SETSCHEDULER 1
 
 /* Define to 1 if you have the `secure_getenv' function. */
-#define HAVE_SECURE_GETENV 1
+/* #undef HAVE_SECURE_GETENV */
 
 /* Define to 1 if you have the `security_get_initial_context' function. */
 /* #undef HAVE_SECURITY_GET_INITIAL_CONTEXT */
