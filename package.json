@@ -4,10 +4,11 @@
   "description": "Interface for libblkid, a library to identify block devices",
   "main": "build/Release/blkid.node",
   "scripts": {
-    "install": "prebuild --install",
+    "install": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --all --strip --verbose",
     "rebuild": "prebuild --compile",
-    "test": "./test.js"
+    "test": "./test.js",
+    "unbuild": "rm -r build/ deps/ gyp/"
   },
   "repository": {
     "type": "git",
@@ -32,9 +33,10 @@
   "homepage": "https://github.com/piranna/libblkid#readme",
   "dependencies": {
     "nan": "^2.5.0",
-    "prebuild": "^5.1.2"
+    "prebuild-install": "^2.0.0"
   },
   "devDependencies": {
-    "buho": "^0.2.1"
+    "buho": "^0.2.1",
+    "prebuild": "^6.0.0"
   }
 }
