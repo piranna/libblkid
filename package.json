@@ -1,6 +1,6 @@
 {
   "name": "libblkid",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Interface for libblkid, a library to identify block devices",
   "main": "build/Release/blkid.node",
   "scripts": {
