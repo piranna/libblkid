@@ -18,6 +18,9 @@ void evaluate_tag(const Nan::FunctionCallbackInfo<v8::Value>& info)
   if(info.Length() < 1)
     return info.GetReturnValue().Set(Nan::Null());
 
+  if(info[0]->IsNull() || info[0]->IsUndefined())
+    return info.GetReturnValue().Set(Nan::Null());
+
   if(!info[0]->IsString())
     return Nan::ThrowTypeError("Token must be a string");
 
@@ -60,6 +63,9 @@ void evaluate_spec(const Nan::FunctionCallbackInfo<v8::Value>& info)
 {
   // Check arguments
   if(info.Length() < 1)
+    return info.GetReturnValue().Set(Nan::Null());
+
+  if(info[0]->IsNull() || info[0]->IsUndefined())
     return info.GetReturnValue().Set(Nan::Null());
 
   if(!info[0]->IsString())
